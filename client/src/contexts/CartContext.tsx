@@ -14,14 +14,14 @@ interface CartContextType {
 const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [cart, setCart] = useState<CartItem[]>([]);
-
-  useEffect(() => {
-    const savedCart = localStorage.getItem('flower-cart');
-    if (savedCart) {
-      setCart(JSON.parse(savedCart));
+  const [cart, setCart] = useState<CartItem[]>(() => {
+    try {
+      const savedCart = localStorage.getItem('flower-cart');
+      return savedCart ? JSON.parse(savedCart) : [];
+    } catch {
+      return [];
     }
-  }, []);
+  });
 
   useEffect(() => {
     localStorage.setItem('flower-cart', JSON.stringify(cart));
