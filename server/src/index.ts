@@ -14,7 +14,7 @@ const nodeEnv = process.env.NODE_ENV || 'development';
 
 // Разрешенные домены для CORS
 const allowedOrigins = [
-  process.env.FRONT_URL ? `https://${process.env.FRONT_URL}` : '' // URL самого бэкенда
+  process.env.FRONT_URL || '',
 ].filter(origin => origin && origin.trim() !== '');
 
 // Middleware CORS
