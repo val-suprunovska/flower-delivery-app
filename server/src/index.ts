@@ -7,18 +7,14 @@ import routes from './routes';
 dotenv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT;
 
 // Безопасное получение URL фронтенда
-const frontendUrl = process.env.FRONTEND_URL || '';
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 // Разрешенные домены для CORS
 const allowedOrigins = [
-  'http://localhost:5173',
-  'http://127.0.0.1:5173',
-  frontendUrl, // URL фронтенда на Vercel
-  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '' // URL самого бэкенда
+  process.env.FRONT_URL ? `https://${process.env.FRONT_URL}` : '' // URL самого бэкенда
 ].filter(origin => origin && origin.trim() !== '');
 
 // Middleware CORS
@@ -47,12 +43,12 @@ app.use(express.json());
 app.use('/api', routes);
 
 // MongoDB connection
-const mongoURI = process.env.MONGODB_URI || 'mongodb+srv://admin:admin@cluster0.o2c2sh9.mongodb.net/';
+const mongoURI = process.env.MONGODB_URI || '';
 mongoose.connect(mongoURI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((error) => console.error('MongoDB connection error:', error));
 
-// Export для Vercel serverless
+// Export для Render
 export default app;
 
 // Локальный запуск для разработки
