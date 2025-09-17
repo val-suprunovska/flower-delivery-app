@@ -52,9 +52,7 @@ mongoose.connect(mongoURI)
 export default app;
 
 // Локальный запуск для разработки
-if (nodeEnv !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server is running on port ${PORT}`);
-    console.log('Allowed CORS origins:', allowedOrigins);
-  });
-}
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+  console.log('Allowed CORS origins:', allowedOrigins);
+});
