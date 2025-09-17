@@ -20,9 +20,11 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon --exec tsx src/index.ts",
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "vercel-build": "npm install && npm run build",
-    "seed": "ts-node src/seed/seedData.ts"
+    "build": "tsc",
+    "vercel-build": "npm install && npx tsx src/index.ts",
+    "start": "npx tsx src/index.ts",
+    "seed": "ts-node src/seed/seedData.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "",
