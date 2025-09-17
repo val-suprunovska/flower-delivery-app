@@ -92,30 +92,20 @@ export const createSampleData = async (req: Request, res: Response) => {
     // Создаем товары
     const products = await Product.insertMany([
       {
-        name: "Red Roses Bouquet",
+        name: "Roses Bouquet",
         price: 45.99,
-        description: "Beautiful bouquet of 12 fresh red roses, perfect for romantic occasions.",
-        image: "https://images.unsplash.com/photo-1563170351-be82bc888aa4?w=400&h=300&fit=crop",
+        description: "Beautiful bouquet of 12 fresh roses, perfect for romantic occasions.",
+        image: "https://klever-flowers.com/files/product/6/316/316_s.jpg",
         category: "bouquet",
         isFavorite: true,
         shop: shop1._id,
         createdAt: new Date('2024-01-15')
       },
       {
-        name: "Sunflower Arrangement",
-        price: 35.50,
-        description: "Bright and cheerful sunflower bouquet that brings sunshine to any room.",
-        image: "https://images.unsplash.com/photo-1597848212624-e9d2c1b6a5f6?w=400&h=300&fit=crop",
-        category: "bouquet",
-        isFavorite: false,
-        shop: shop1._id,
-        createdAt: new Date('2024-01-10')
-      },
-      {
         name: "White Lilies",
         price: 42.75,
         description: "Pure white lilies that symbolize purity and beauty, great for special occasions.",
-        image: "https://images.unsplash.com/photo-1572853131516-8eb201106b65?w=400&h=300&fit=crop",
+        image: "https://kvitka.od.ua/image/cache/webp/catalog/new/05002-290x290.webp",
         category: "bouquet",
         isFavorite: true,
         shop: shop2._id,
@@ -125,7 +115,7 @@ export const createSampleData = async (req: Request, res: Response) => {
         name: "Premium Rose Collection",
         price: 89.99,
         description: "Luxurious collection of 24 premium roses in various colors with premium packaging.",
-        image: "https://images.unsplash.com/photo-1582794543139-8fe0c6cff5c9?w=400&h=300&fit=crop",
+        image: "https://klever-flowers.com/files/product/1/601/601_s.jpg",
         category: "bouquet",
         isFavorite: true,
         shop: shop3._id,
