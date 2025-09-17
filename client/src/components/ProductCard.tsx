@@ -38,7 +38,7 @@ export const ProductCard: React.FC<ProductCardProps> = ({
 
   return (
     <div className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
-      <img src={product.image} alt={product.name} className="w-full h-48 object-cover" />
+      <img src={product.image} alt={product.name} className="w-full h-88 object-cover" />
       <div className="p-4">
         <div className="flex justify-between items-start mb-2">
           <h3 className="text-lg font-semibold text-gray-800">{product.name}</h3>
