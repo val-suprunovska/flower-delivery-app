@@ -70,7 +70,7 @@ export const OrderDetailsPage: React.FC = () => {
                 />
                 <div>
                   <p className="font-semibold">{item.product.name}</p>
-                  <p className="text-sm text-gray-600">Qty: {item.quantity}</p>
+                  <p className="text-sm text-gray-600">Quantity: {item.quantity}</p>
                 </div>
               </div>
               <p className="font-semibold">${(item.price * item.quantity).toFixed(2)}</p>

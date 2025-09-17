@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { useCart } from '../hooks/useCart';
+import { useCart } from '../contexts/CartContext';
 import { BuildingStorefrontIcon, ShoppingCartIcon } from '@heroicons/react/24/outline';
 
 export const Navigation: React.FC = () => {

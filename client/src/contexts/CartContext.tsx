@@ -1,7 +1,19 @@
-import { useState, useEffect } from 'react';
+import React, { createContext, useContext, useEffect, useState } from 'react';
 import type { CartItem, Product } from '../types';
 
-export const useCart = () => {
+interface CartContextType {
+  cart: CartItem[];
+  addToCart: (product: Product, quantity?: number) => void;
+  removeFromCart: (productId: string) => void;
+  updateQuantity: (productId: string, quantity: number) => void;
+  clearCart: () => void;
+  totalItems: number;
+  totalPrice: number;
+}
+
+const CartContext = createContext<CartContextType | undefined>(undefined);
+
+export const CartProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [cart, setCart] = useState<CartItem[]>([]);
 
   useEffect(() => {
@@ -12,12 +24,7 @@ export const useCart = () => {
   }, []);
 
   useEffect(() => {
-    if (cart && Array.isArray(cart) && cart.length > 0) {
-      // console.log("check",cart)
-      localStorage.setItem('flower-cart', JSON.stringify(cart));
-    }
-    
-    // console.log(cart)
+    localStorage.setItem('flower-cart', JSON.stringify(cart));
   }, [cart]);
 
   const addToCart = (product: Product, quantity: number = 1) => {
@@ -37,7 +44,10 @@ export const useCart = () => {
   };
 
   const removeFromCart = (productId: string) => {
-    setCart(prev => prev.filter(item => item.productId !== productId));
+    setCart(prev => {
+      const newCart = prev.filter(item => item.productId !== productId);
+      return newCart;
+    });
   };
 
   const updateQuantity = (productId: string, quantity: number) => {
@@ -61,13 +71,26 @@ export const useCart = () => {
   const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
   const totalPrice = cart.reduce((sum, item) => sum + (item.product.price * item.quantity), 0);
 
-  return {
-    cart,
-    addToCart,
-    removeFromCart,
-    updateQuantity,
-    clearCart,
-    totalItems,
-    totalPrice
-  };
+  return (
+    <CartContext.Provider value={{
+      cart,
+      addToCart,
+      removeFromCart,
+      updateQuantity,
+      clearCart,
+      totalItems,
+      totalPrice
+    }}>
+      {children}
+    </CartContext.Provider>
+  );
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const useCart = () => {
+  const context = useContext(CartContext);
+  if (!context) {
+    throw new Error('useCart must be used within a CartProvider');
+  }
+  return context;
 };

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import type { Product, Shop } from '../types';
 import { shopAPI, productAPI, type ProductsQueryParams } from '../services/api';
 import { ProductCard } from '../components/ProductCard';
-import { useCart } from '../hooks/useCart';
+import { useCart } from '../contexts/CartContext';
 
 export const FlowerShopsPage: React.FC = () => {
   const [shops, setShops] = useState<Shop[]>([]);
@@ -10,6 +10,7 @@ export const FlowerShopsPage: React.FC = () => {
   const [selectedShop, setSelectedShop] = useState<string>('');
   const [sortBy, setSortBy] = useState<'price' | 'date' | 'favorite'>('date');
   const [sortOrder, setSortOrder] = useState<'asc' | 'desc'>('desc');
+  const [refreshTrigger, setRefreshTrigger] = useState(0);
   
   const { addToCart } = useCart();
 
@@ -40,7 +41,11 @@ export const FlowerShopsPage: React.FC = () => {
     };
 
     loadProducts();
-  }, [selectedShop, sortBy, sortOrder]);
+  }, [selectedShop, sortBy, sortOrder, refreshTrigger]);
+
+  const handleFavoriteToggle = () => {
+    setRefreshTrigger(prev => prev + 1);
+  };
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -86,6 +91,7 @@ export const FlowerShopsPage: React.FC = () => {
             key={product._id}
             product={product}
             onAddToCart={addToCart}
+            onFavoriteToggle={handleFavoriteToggle}
           />
         ))}
       </div>
