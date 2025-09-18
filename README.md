@@ -1,5 +1,5 @@
 # Flower Delivery App
-[link](https://flowerdeliveryapp.netlify.app/)
+[link](https://flower-delivery-app-qrfm.vercel.app/)
 
 ## Middle Level Implemented
 
@@ -54,7 +54,7 @@ A web application for selecting flower shops, adding bouquets/flowers to cart, p
 
 ### 1. Clone Repository
 ```bash
-git clone <repository-url>
+git clone https://github.com/val-suprunovska/flower-delivery-app.git
 cd flower-delivery-app
 ```
 ### 2. Setup Server
@@ -144,4 +144,4 @@ DELETE /api/dev/clear-data
 
 ## Deployment
 The application is available at the public URL:   
-https://flowerdeliveryapp.netlify.app/
+https://flower-delivery-app-qrfm.vercel.app/
