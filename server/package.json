@@ -9,25 +9,25 @@
     "uuid": "^13.0.0"
   },
   "devDependencies": {
-    "@types/node": "^20.0.0",
     "@types/cors": "^2.8.19",
     "@types/express": "^5.0.3",
-    "ts-node-dev": "^2.0.0",
-    "typescript": "^5.1.6",
+    "@types/node": "^20.19.17",
     "nodemon": "^3.1.10",
-    "tsx": "^4.19.3"
+    "ts-node-dev": "^2.0.0",
+    "tsx": "^4.19.3",
+    "typescript": "^5.1.6"
   },
   "name": "server",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-  "dev": "nodemon --exec tsx src/index.ts",
-  "build": "tsc",
-  "start": "node dist/index.js",
-  "seed": "ts-node src/seed/seedData.ts",
-  "test": "echo \"Error: no test specified\" && exit 1"
-},
+    "dev": "nodemon --exec tsx src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "seed": "ts-node src/seed/seedData.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC"
