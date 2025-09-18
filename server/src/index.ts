@@ -23,21 +23,7 @@ const allowedOrigins = [
 
 // Middleware CORS
 app.use(cors({
-  origin: function (origin, callback) {
-    // Разрешаем запросы без origin (Postman, мобильные приложения)
-    if (!origin) return callback(null, true);
-    
-    // Проверяем разрешенные origin
-    const isAllowed = allowedOrigins.some(allowedOrigin => 
-      origin.startsWith(allowedOrigin)
-    );
-    
-    if (isAllowed) {
-      return callback(null, true);
-    }
-    
-    callback(new Error('CORS policy: Origin not allowed'), false);
-  },
+  origin: '*', // Разрешить все домены
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
