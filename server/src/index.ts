@@ -10,17 +10,21 @@ const app = express();
 const PORT = process.env.PORT || 10000;
 
 // Безопасное получение URL фронтенда
+const frontendUrl = process.env.FRONTEND_URL || '';
 const nodeEnv = process.env.NODE_ENV || 'development';
 
 // Разрешенные домены для CORS
 const allowedOrigins = [
-  process.env.FRONT_URL || '',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  frontendUrl,
+  'https://flower-delivery-app-qrfm.vercel.app/'
 ].filter(origin => origin && origin.trim() !== '');
 
 // Middleware CORS
 app.use(cors({
   origin: function (origin, callback) {
-    // Разрешаем запросы без origin
+    // Разрешаем запросы без origin (Postman, мобильные приложения)
     if (!origin) return callback(null, true);
     
     // Проверяем разрешенные origin
@@ -43,16 +47,21 @@ app.use(express.json());
 app.use('/api', routes);
 
 // MongoDB connection
-const mongoURI = process.env.MONGODB_URI || '';
+const mongoURI = process.env.MONGODB_URI;
+if (!mongoURI) {
+  console.error('MONGODB_URI is required');
+  process.exit(1);
+}
+
 mongoose.connect(mongoURI)
   .then(() => console.log('Connected to MongoDB'))
   .catch((error) => console.error('MongoDB connection error:', error));
-
-// Export для Render
-export default app;
 
 // Локальный запуск для разработки
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
   console.log('Allowed CORS origins:', allowedOrigins);
+  console.log('Environment:', nodeEnv);
 });
+
+export default app;
